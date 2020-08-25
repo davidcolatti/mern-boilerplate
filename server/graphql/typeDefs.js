@@ -16,6 +16,7 @@ const typeDefs = gql`
     email: String
     disposition: String
   }
+
   type User {
     _id: ID
     uid: String
@@ -25,6 +26,7 @@ const typeDefs = gql`
     indexOfMasterLeads: Int
     leadsList: [Lead]
   }
+
   type Query {
     leads: [Lead]
     leadsCount: Int
@@ -32,6 +34,7 @@ const typeDefs = gql`
     findUser(uid: String!): User!
     searchLeads(key: String!, searchTerm: String!): [Lead]
   }
+
   type Mutation {
     updateLeadList(id: String!, leadId: String!): User!
   }
