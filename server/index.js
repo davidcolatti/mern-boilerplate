@@ -1,9 +1,8 @@
 const { ApolloServer } = require("apollo-server-express");
-const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
-const routes = require("./routes/register");
+const routes = require("./routes");
 const typeDefs = require("./graphql/typeDefs");
 const resolvers = require("./graphql/resolvers");
 
@@ -32,21 +31,22 @@ const startServer = async () => {
     resolvers,
     playground: true,
     introspection: true,
-    engine: {
-      reportSchema: true,
-    },
   });
 
   const app = express();
 
+  await server.start();
+
   server.applyMiddleware({ app });
 
-  app.use(bodyParser.json());
-  app.use("/", routes);
+  app.use(express.json());
+
+  app.use("/api", routes);
+
   app.use(
     cors({
       credentials: true,
-      origin: ["http://localhost:3000"], // add client urls
+      origin: ["http://localhost:3000"],
     })
   );
 

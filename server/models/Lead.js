@@ -2,18 +2,13 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const leadSchema = new Schema({
+  spid: Number,
   businessName: String,
   phoneNumber: String,
-  city: String,
-  state: String,
-  firstName: String,
-  lastName: String,
-  streetAddress: String,
-  secondPhoneNumber: String,
-  notes: String,
-  category: Array,
-  email: String,
-  disposition: String,
+  uploadDate: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const Lead = mongoose.model("Lead", leadSchema);
