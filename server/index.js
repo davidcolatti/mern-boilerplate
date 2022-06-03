@@ -1,10 +1,7 @@
-const { ApolloServer } = require("apollo-server-express");
 const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 const routes = require("./routes");
-const typeDefs = require("./graphql/typeDefs");
-const resolvers = require("./graphql/resolvers");
 
 require("dotenv").config();
 
@@ -25,19 +22,7 @@ const startServer = async () => {
     console.error(`Error connecting to mongo ${err}`);
   }
 
-  // Creating a new apollo server with playground
-  const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    playground: true,
-    introspection: true,
-  });
-
   const app = express();
-
-  await server.start();
-
-  server.applyMiddleware({ app });
 
   app.use(express.json());
 
@@ -58,11 +43,9 @@ const startServer = async () => {
     });
   }
 
-  const PORT = process.env.PORT || 4000;
+  const PORT = process.env.PORT || 5001;
   app.listen(PORT, () => {
-    console.log(
-      `🚀 Server ready at http://localhost:4000${server.graphqlPath}`
-    );
+    console.log(`🚀 Server ready at http://localhost:${PORT}`);
   });
 };
 

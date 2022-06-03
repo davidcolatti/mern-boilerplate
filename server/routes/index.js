@@ -1,8 +1,8 @@
 const router = require("express").Router();
 
-router.get("/download-csv", async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   res.status(200).json({
-    message: "Download Csv",
+    message: "Hello World!",
   });
 });
 
